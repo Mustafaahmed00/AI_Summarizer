@@ -4,8 +4,6 @@
 
 Sumz is an advanced AI-powered article summarization tool that transforms lengthy articles into concise, insightful summaries using cutting-edge machine learning technology.
 
-![Project Banner](link-to-your-project-banner.png)
-
 ## ✨ Features
 
 - **AI-Powered Summarization**: Leverage OpenAI GPT-4 to generate precise article summaries
