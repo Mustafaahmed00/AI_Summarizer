@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { motion, AnimatePresence } from "framer-motion";
 import { copy, linkIcon, loader, tick } from "../assets";
 import { useLazyGetSummaryQuery } from "../services/article";
 
@@ -10,6 +10,7 @@ const Demo = () => {
   });
   const [allArticles, setAllArticles] = useState([]);
   const [copied, setCopied] = useState("");
+  const [deleteConfirmation, setDeleteConfirmation] = useState(null);
 
   // RTK lazy query
   const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
@@ -53,6 +54,14 @@ const Demo = () => {
     setTimeout(() => setCopied(false), 3000);
   };
 
+  // Delete a specific link from history
+  const handleDelete = (urlToDelete) => {
+    const updatedArticles = allArticles.filter(item => item.url !== urlToDelete);
+    setAllArticles(updatedArticles);
+    localStorage.setItem("articles", JSON.stringify(updatedArticles));
+    setDeleteConfirmation(null);
+  };
+
   const handleKeyDown = (e) => {
     if (e.keyCode === 13) {
       handleSubmit(e);
@@ -60,9 +69,9 @@ const Demo = () => {
   };
 
   return (
-    <section className='mt-16 w-full max-w-xl'>
+    <section className='mt-16 w-full max-w-xl relative'>
       {/* Search */}
-      <div className='flex flex-col w-full gap-2'>
+      <div className='flex flex-col w-full gap-4'>
         <form
           className='relative flex justify-center items-center'
           onSubmit={handleSubmit}
@@ -70,7 +79,7 @@ const Demo = () => {
           <img
             src={linkIcon}
             alt='link-icon'
-            className='absolute left-0 my-2 ml-3 w-5'
+            className='absolute left-0 my-2 ml-3 w-5 opacity-70'
           />
 
           <input
@@ -80,34 +89,45 @@ const Demo = () => {
             onChange={(e) => setArticle({ ...article, url: e.target.value })}
             onKeyDown={handleKeyDown}
             required
-            className='url_input peer' // When you need to style an element based on the state of a sibling element, mark the sibling with the peer class, and use peer-* modifiers to style the target element
+            className='url_input peer pl-12 shadow-md focus:ring-2 focus:ring-blue-200 transition duration-300'
           />
           <button
             type='submit'
-            className='submit_btn peer-focus:border-gray-700 peer-focus:text-gray-700 '
+            className='submit_btn peer-focus:border-blue-500 peer-focus:text-blue-500 hover:bg-blue-50 transition'
           >
             <p>↵</p>
           </button>
         </form>
 
         {/* Browse History */}
-        <div className='flex flex-col gap-1 max-h-60 overflow-y-auto'>
+        <div className='flex flex-col gap-2 max-h-60 overflow-y-auto'>
           {allArticles.reverse().map((item, index) => (
             <div
               key={`link-${index}`}
-              onClick={() => setArticle(item)}
-              className='link_card'
+              className='flex items-center space-x-2 bg-white border rounded-lg p-2 hover:shadow-sm transition'
             >
-              <div className='copy_btn' onClick={() => handleCopy(item.url)}>
+              <div 
+                className='copy_btn mr-2' 
+                onClick={() => handleCopy(item.url)}
+              >
                 <img
                   src={copied === item.url ? tick : copy}
                   alt={copied === item.url ? "tick_icon" : "copy_icon"}
                   className='w-[40%] h-[40%] object-contain'
                 />
               </div>
-              <p className='flex-1 font-satoshi text-blue-700 font-medium text-sm truncate'>
+              <p 
+                onClick={() => setArticle(item)}
+                className='flex-1 text-blue-700 font-medium text-sm truncate cursor-pointer hover:text-blue-900'
+              >
                 {item.url}
               </p>
+              <button 
+                onClick={() => handleDelete(item.url)}
+                className='text-red-500 hover:text-red-700 transition'
+              >
+                🗑️
+              </button>
             </div>
           ))}
         </div>
