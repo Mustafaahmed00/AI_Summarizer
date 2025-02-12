@@ -1,0 +1,344 @@
+/* Import fonts if needed */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* Main layout */
+.main {
+  width: 100vw;
+  min-height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  padding: 120px 24px 160px 24px;
+  pointer-events: none;
+}
+
+.main:before {
+  background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
+  position: absolute;
+  content: "";
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+.main:after {
+  content: "";
+  background-image: url("/src/assets/grid.svg");
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  opacity: 0.4;
+  filter: invert(1);
+}
+
+.gradient {
+  height: fit-content;
+  z-index: 3;
+  width: 100%;
+  max-width: 640px;
+  background-image: 
+    radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 1) 0px, transparent 0%),
+    radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
+    radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 1) 0px, transparent 50%),
+    radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
+    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
+    radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
+    radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  filter: blur(100px) saturate(150%);
+  top: 80px;
+  opacity: 0.15;
+}
+
+.app {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.black_btn {
+  border-radius: 9999px;
+  border: 1px solid black;
+  background-color: black;
+  padding: 6px 20px;
+  font-size: 14px;
+  color: white;
+  transition: all 0.3s;
+}
+
+.black_btn:hover {
+  background-color: white;
+  color: black;
+}
+
+.head_text {
+  margin-top: 20px;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: black;
+  text-align: center;
+}
+
+.orange_gradient {
+  background: linear-gradient(to right, #f59e0b, #ea580c, #eab308);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.blue_gradient {
+  font-weight: 900;
+  background: linear-gradient(to right, #2563eb, #0891b2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.desc {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #4b5563;
+  text-align: center;
+  max-width: 42rem;
+}
+
+.url_input {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  background-color: white;
+  padding: 10px 48px 10px 40px;
+  font-size: 14px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+}
+
+.url_input:focus {
+  border-color: black;
+  outline: none;
+}
+
+.submit_btn {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  font-weight: 500;
+  color: #9ca3af;
+  transition: all 0.3s;
+}
+
+.submit_btn:hover {
+  border-color: #4b5563;
+  color: #4b5563;
+}
+
+.link_card {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.copy_btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 10px -50px 94px 0 rgba(199, 199, 199, 0.2);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.summary_box {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 10px -50px 94px 0 rgba(199, 199, 199, 0.2);
+  backdrop-filter: blur(4px);
+  padding: 16px;
+}
+
+@media screen and (max-width: 640px) {
+  .main {
+    padding: 0;
+  }
+  
+  .head_text {
+    font-size: 32px;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .app {
+    padding: 0 64px;
+  }
+  
+  .head_text {
+    font-size: 60px;
+  }
+  
+  .desc {
+    font-size: 20px;
+  }
+}
+/* Add to your existing CSS */
+.nav-link {
+  color: #4b5563;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+.nav-link:hover {
+  background-color: #f3f4f6;
+}
+
+.try-demo-btn {
+  background: #000;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+}
+
+.try-demo-btn:hover {
+  opacity: 0.9;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Add to your existing CSS */
+.main-gradient {
+  background: linear-gradient(
+    135deg,
+    #f6f8ff 0%,
+    #f0f4ff 25%,
+    #edf1ff 50%,
+    #e8edff 75%,
+    #e3eaff 100%
+  );
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.037);
+}
+
+.nav-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #000;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.feature-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Animations */
+@keyframes blob {
+  0% {
+      transform: translate(0, 0) scale(1);
+  }
+  33% {
+      transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+      transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+      transform: translate(0, 0) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 15s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+/* Additional Tailwind-like utilities */
+.animate-fade-in {
+  animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
